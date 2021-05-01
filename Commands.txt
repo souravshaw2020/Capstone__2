@@ -1,0 +1,6 @@
+python manage.py makemigrations
+python manage.py migrate
+python manage.py runserver
+#Bulk Import: copy app_capstone(mname,mgenre,mreview) from 'path to dataset.csv' delimiter ',' csv header;
+
+#install all the libraries in you virtual env present in Model\Complete_ML_Capstone

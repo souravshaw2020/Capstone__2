@@ -1,0 +1,62 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Top 10</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="static/css/top10.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <nav>
+    <input type="checkbox" id="check">
+    <label for="check">
+        <i class="fas fa-bars" id="btn"></i>
+        <i class="fas fa-times" id="cancel"></i>
+    </label>
+    <img src="static/img/netflix-log.svg" class="image" alt="">
+    <h1>Movie Popularity Analysis</h1>
+    <ul> 
+      <li><a href="{% url 'visitorlogin' %}">Genre Based Shows</a></li>
+      <li><a href="{% url 'trending' %}">Trending Shows</a></li>
+      <li><a href="{% url 'top10' %}">Top 10 Shows</a></li>
+      <button class="btn solid"><a href="{% url 'login' %}">Logout</a></button>
+    </ul>
+  </nav>
+<div class="container">
+  <h2>Top 10 Shows</h2>           
+  <table class="table">
+    <thead>
+    <tr>
+      <th scope="col">S No.</th>
+      <th scope="col">Movie</th>
+      <th scope="col">Genre</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for i in query %} 
+    <tr>
+      <td><p>{{ forloop.counter }}</p></td>
+      <td><p>{{ i.0 }}</p></td>
+      <td><p>{{ i.1 }}</p></td>
+    </tr>
+   {% endfor %} 
+  </tbody>
+</table>
+</div>
+<script>
+  $('#check').change(function(){
+      if($(this).is(":checked")){
+          $('.container').addClass('display');
+      }
+      else{
+          $('.container').removeClass('display');
+      }
+  });
+</script>
+</body>
+</html>

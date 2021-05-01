@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Site</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static '/css/admin.css' %}">
+</head>
+<body>
+    <div class="container">
+    <nav>
+        <img src="{% static '/img/netflix-log.svg' %}" class="image" alt="">
+        <h1>Movie Popularity Analysis</h1>
+        <ul>
+            <form action="logout" method="POST">
+                {% csrf_token %}
+                <button class="btn solid">Logout</button>
+                </form>
+        </ul>
+    </nav>
+    <div class="category">
+        <h2>Add Show Details</h2>
+    <form action="abc" method="POST">
+        {% csrf_token %}
+        <label class="lmname">Movie Name :</label>
+        <input type="text" name="mname" class="tlmname" required>
+        <label class="llgenre">Genre :</label>
+        <input type="text" name="mgenre" class="tlgenre" required>
+        <label class="lreview">Review :</label>
+        <input type="text" name="mreview" class="tlreview" required>
+        <input type="submit" value="Submit" class="btn1">
+    </form>
+    </div>
+    <div class="category">
+    <h3>Predicting the Show</h3>
+    <form action="prediction" method="GET">
+        <input type="submit" value="Predict" class="btn2">
+    </form>
+    </div>
+    <div class="category">
+        <h4>Scraping</h4>
+    <form action="scrape" method="POST">
+        {% csrf_token %}
+        <label class="lrmname">Enter the Movie Name for Reviews :</label>
+        <input type="text" name="movieScrape" class="tlrmname" required>
+        <input type="submit" value="Scrape Reviews" class="btn3">
+    </form>
+    </div>
+    
+    <!-- {% for i in result %}
+    <h2> {{i.mname}} {{i.mgenre}} {{i.mreview}}</h2>
+    {% endfor %} -->
+    </div>
+</body>
+</html>

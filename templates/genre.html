@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>Genre Based Shows</title>
+    <link rel="stylesheet" href="static/css/vshowstyle.css">
+</head>
+<body>
+<div class="container">
+    <nav>
+        <input type="checkbox" id="check">
+        <label for="check">
+            <i class="fas fa-bars" id="btn"></i>
+            <i class="fas fa-times" id="cancel"></i>
+        </label>
+        <img src="static/img/netflix-log.svg" class="image" alt="">
+        <h1>Movie Popularity Analysis</h1>
+        <ul>
+            
+            <li><a href="{% url 'visitorlogin' %}">Genre Based Shows</a></li>
+            <li><a href="{% url 'trending' %}">Trending Shows</a></li>
+            <li><a href="{% url 'top10' %}">Top 10 Shows</a></li>
+            <button class="btn solid"><a href="{% url 'login' %}">Logout</a></button>
+        </ul>
+    </nav>
+    <div class="category">
+        <form action="visitorlogin" method="POST" class="genreshows">
+        {% csrf_token %}
+            <label class="lgenre">Genre :</label>
+            <select name="genre" class="custom-select" id="genre">
+                <option value="">Select</option>
+                <option value="Comedy">Comedy</option>
+                <option value="Thriller">Thriller</option>
+                <option value="Drama">Drama</option>
+                <option value="Mystery">Mystery</option>
+                <option value="Action">Action</option>
+                <option value="Romance">Romance</option>
+                <option value="Horror">Horror</option>
+                <option value="War">War</option>
+                <option value="Fantasy">Fantasy</option>
+            </select>
+            <label class="lpopular">Overall Popularity :</label>
+            <select name="popular" class="custom-select-1" id="popular">
+                <option value="">Select</option>
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+            </select>
+            
+            <input id="button" type="submit" class="btn solid btn1" value="Generate" name="Generate">
+            
+        </form>
+    </div>
+    <div id= "show" class="data" style="margin-left: 7.7em;">
+        <table id="table">
+        {% for i in query.0 %}
+        {% if forloop.first %}
+            <tr>
+                <th>S No.</th>
+                <th>Name</th>
+                <th>Genre</th>
+            </tr>
+            {%endif%}
+            {% endfor %}
+            {% for i in query %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{i.0}}</td>
+                <td>{{i.1}}</td> 
+            </tr>
+            {% endfor %}
+        </table>
+        
+    </div>
+</div>
+
+<script>
+    $('#check').change(function(){
+        if($(this).is(":checked")){
+            $('.category').addClass('display');
+            $('.data').addClass('display');
+        }
+        else{
+            $('.category').removeClass('display');
+            $('.data').removeClass('display');
+        }
+    });
+</script>     
+</body>
+</html>
